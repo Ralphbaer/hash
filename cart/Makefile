@@ -24,12 +24,9 @@ run:
 	go run main.go
 	
 test:
-	make unit-test && make integration-test
-
-unit-test:
 	mkdir -p $(artifacts-dir) && \
 	gotestsum --format short-verbose --junitfile $(artifacts-dir)/junit-report.xml \
-	./... github.com/Ralphbaer/hash/common... \
+	./... github.com/klivohealth/klivo-go/common... \
 	-coverprofile=$(artifacts-dir)/coverage.out
 
 cover-html:
