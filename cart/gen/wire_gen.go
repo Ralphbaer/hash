@@ -7,11 +7,13 @@ package gen
 
 import (
 	"github.com/Ralphbaer/hash/cart/app"
+	"github.com/Ralphbaer/hash/cart/gateway"
 	"github.com/Ralphbaer/hash/cart/handler"
 	"github.com/Ralphbaer/hash/cart/usecase"
 	"github.com/Ralphbaer/hash/common"
 	"github.com/google/wire"
 	"github.com/gorilla/mux"
+	"google.golang.org/grpc"
 	"net/http"
 )
 
@@ -19,7 +21,14 @@ import (
 
 func InitializeApp() *app.App {
 	config := app.NewConfig()
-	cartUseCase := &usecase.CartUseCase{}
+	clientConn := setupDiscountGatewayClient(config)
+	depositClient := gateway.NewDiscountClient(clientConn)
+	discountGateway := &gateway.DiscountGateway{
+		DepositClient: depositClient,
+	}
+	cartUseCase := &usecase.CartUseCase{
+		Gateway: discountGateway,
+	}
 	cartHandler := &handler.CartHandler{
 		UseCase: cartUseCase,
 	}
@@ -33,4 +42,13 @@ func InitializeApp() *app.App {
 
 // inject.go:
 
-var applicationSet = wire.NewSet(common.InitLocalEnvConfig, app.NewConfig, app.NewRouter, app.NewServer, wire.Struct(new(usecase.CartUseCase), "*"), wire.Struct(new(handler.CartHandler), "*"), wire.Bind(new(http.Handler), new(*mux.Router)))
+func setupDiscountGatewayClient(cfg *app.Config) *grpc.ClientConn {
+	conn, err := grpc.Dial(":50051", grpc.WithInsecure())
+	if err != nil {
+		panic(err)
+	}
+
+	return conn
+}
+
+var applicationSet = wire.NewSet(common.InitLocalEnvConfig, app.NewConfig, app.NewRouter, app.NewServer, setupDiscountGatewayClient, gateway.NewDiscountClient, wire.Struct(new(gateway.DiscountGateway), "*"), wire.Struct(new(usecase.CartUseCase), "*"), wire.Struct(new(handler.CartHandler), "*"), wire.Bind(new(gateway.DiscountServiceGateway), new(*gateway.DiscountGateway)), wire.Bind(new(http.Handler), new(*mux.Router)))

@@ -11,6 +11,6 @@ type CreateCartInput struct {
 // including its amount and if its a gift or not.
 // swagger:model Product
 type Product struct {
-	ID       string `json:"id"`
+	ID       int `json:"id"`
 	Quantity int32  `json:"quantity"`
 }
