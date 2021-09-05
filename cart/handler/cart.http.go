@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -55,8 +54,8 @@ func (handler *CartHandler) Create(p interface{}) http.Handler {
 			return
 		}
 
-		log.Printf("Successfully created Cart. ID: %s", cart.ID)
-		w.Header().Set("Location", fmt.Sprintf("%s/cart/carts/%s", r.Host, cart.ID))
+		// log.Printf("Successfully created Cart. ID: %s", cart.ID)
+		// w.Header().Set("Location", fmt.Sprintf("%s/cart/carts/%s", r.Host, cart.ID))
 		w.Header().Set("Content-Type", "application/json")
 
 		commonHTTP.Created(w, cart)

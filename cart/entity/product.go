@@ -5,9 +5,10 @@ package entity
 // swagger:model Product
 type Product struct {
 	// ID is a unique field
-	ID          string `json:"id"`
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Amount      int    `json:"amount"`
-	IsGift      bool   `json:"is_gift"`
+	ID          int  `json:"id"`
+	Quantity    int  `json:"quantity"`
+	UnitAmount  int  `json:"unit_amount"`
+	TotalAmount int  `json:"total_amount"`
+	Discount    int  `json:"discount"`
+	IsGift      bool `json:"is_gift"`
 }

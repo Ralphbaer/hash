@@ -11,7 +11,7 @@ import (
 type CartUseCase struct{}
 
 // Create creates a new Cart with a list of products
-func (uc *CartUseCase) Create(ctx context.Context, cpi *CreateCartInput) (*e.Product, error) {
+func (uc *CartUseCase) Create(ctx context.Context, cpi *CreateCartInput) (*e.Cart, error) {
 	log.Printf("CartUseCase.Create.CreateCartInput %+v", cpi)
 
 	return nil, nil
