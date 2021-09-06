@@ -30,7 +30,7 @@ type CartHandler struct {
 //  - Definitions: []
 //
 // responses:
-//   '201':
+//   '200':
 //     description: Success Operation
 //     schema:
 //       "$ref": "#/definitions/Cart"
@@ -46,16 +46,14 @@ func (handler *CartHandler) Create(p interface{}) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		payload := p.(*uc.CreateCartInput)
 
-		log.Printf("Trying to create Cart with payload %+v", payload)
+		log.Printf("Trying to mount a Cart with payload %+v", payload)
 
 		cart, err := handler.UseCase.Create(r.Context(), payload)
 		if err != nil {
-			log.Println(err.Error())
+			commonHTTP.WithError(w, err)
 			return
 		}
 
-		// log.Printf("Successfully created Cart. ID: %s", cart.ID)
-		// w.Header().Set("Location", fmt.Sprintf("%s/cart/carts/%s", r.Host, cart.ID))
 		w.Header().Set("Content-Type", "application/json")
 
 		commonHTTP.OK(w, cart)

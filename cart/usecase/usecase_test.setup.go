@@ -18,6 +18,11 @@ func setupCartRepo(mockCtrl *gomock.Controller) *mock.MockProductRepository {
 	m := mock.NewMockProductRepository(mockCtrl)
 	m.
 		EXPECT().
+		List(gomock.Any(), giftProductFilter).
+		Return(giftScenario, nil).
+		AnyTimes()
+	m.
+		EXPECT().
 		List(gomock.Any(), gomock.Any()).
 		Return(happyScenario, nil).
 		AnyTimes()

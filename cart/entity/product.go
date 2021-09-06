@@ -1,7 +1,7 @@
 package entity
 
 // ProductAmount represents a collection of products data,
-// including its amount and if its a gift or not.
+// all its amounts, discounts and if its a gift or not.
 // swagger:model ProductAmount
 type ProductAmount struct {
 	// ID is a unique field

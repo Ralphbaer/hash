@@ -26,7 +26,7 @@ run:
 test:
 	mkdir -p $(artifacts-dir) && \
 	gotestsum --format short-verbose --junitfile $(artifacts-dir)/junit-report.xml \
-	./... github.com/klivohealth/klivo-go/common... \
+	./... github.com/Ralphbaer/hash/common... \
 	-coverprofile=$(artifacts-dir)/coverage.out
 
 cover-html:
@@ -49,10 +49,6 @@ deploy-image:
 	aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 742261599957.dkr.ecr.us-east-2.amazonaws.com/hash/$(service-name) | bash	
 	docker tag hash/$(service-name):v1 742261599957.dkr.ecr.us-east-2.amazonaws.com/hash/$(service-name)
 	docker push 742261599957.dkr.ecr.us-east-2.amazonaws.com/hash/$(service-name):latest
-
-localenv:
-	rm -rf .localenv/.data && \
-	docker-compose -f .localenv/docker-compose.yml up --force-recreate
 
 doc:
 	swagger generate spec -o ./gen/swagger.yaml --scan-models \

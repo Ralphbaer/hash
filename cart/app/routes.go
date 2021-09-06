@@ -1,6 +1,6 @@
 // Package app Cart API.
 //
-// This guide describes all Hash Cart API and usecase.
+// This guide describes all Hash Cart API and usecases.
 //
 //     Schemes: http, https
 //     BasePath: /cart

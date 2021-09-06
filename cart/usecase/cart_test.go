@@ -69,7 +69,7 @@ func TestCartUseCase_CreateCart(t *testing.T) {
 	}
 }
 
-func TestCartUseCase_GetNearestCart_ErrCantBuyAGift(t *testing.T) {
+func TestCartUseCase_CreateCart_ErrCantBuyAGift(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 

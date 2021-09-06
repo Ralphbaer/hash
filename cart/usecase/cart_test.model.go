@@ -1,11 +1,18 @@
 package usecase
 
-import e "github.com/Ralphbaer/hash/cart/entity"
+import (
+	e "github.com/Ralphbaer/hash/cart/entity"
+	r "github.com/Ralphbaer/hash/cart/repository"
+)
 
 var happyScenario = []*e.Product{
 	products[0],
 	products[1],
 	products[2],
+}
+
+var giftScenario = []*e.Product{
+	products[3],
 }
 
 var products = []*e.Product{
@@ -91,4 +98,8 @@ var createCartWithGiftInput = &CreateCartInput{
 			Quantity: 2,
 		},
 	},
+}
+
+var giftProductFilter = &r.ProductFilter{
+	IDs: []int32{4},
 }
