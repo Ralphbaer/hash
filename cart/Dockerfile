@@ -3,7 +3,11 @@ FROM golang:1.8
 WORKDIR /app
 
 ADD ./.bin/cart-service .
-ADD ./gen/swagger.yaml ./gen/
+
+COPY Dockerfile ./gen/swagger.yaml* ./gen/
+COPY Dockerfile ./repository/products.json* ./repository/
+
+RUN rm ./gen/Dockerfile
 
 RUN groupadd -r appusers && useradd --no-log-init -r -g appusers appuser
 

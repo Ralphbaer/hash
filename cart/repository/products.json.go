@@ -18,7 +18,7 @@ type ProductJSONRepository struct {
 // NewProductJSONRepository creates an instance of repository.ProductJSONRepository
 func NewProductJSONRepository() *ProductJSONRepository {
 	return &ProductJSONRepository{
-		FilePath: "./products.json",
+		FilePath: "products.json",
 	}
 }
 
@@ -39,6 +39,7 @@ func (c *ProductJSONRepository) List(ctx context.Context, f *ProductFilter) ([]*
 	return withIDs(obj, f.IDs), nil
 }
 
+// FindRandom sorts a random value inside
 func (c *ProductJSONRepository) FindRandom(ctx context.Context) (*e.Product, error) {
 	pwd, _ := os.Getwd()
 	data, err := ioutil.ReadFile(fmt.Sprintf("%s/repository/%s", pwd, c.FilePath))
