@@ -56,11 +56,11 @@ func (uc *CartUseCase) Create(ctx context.Context, cpi *CreateCartInput) (*e.Car
 			return nil, err
 		}
 		pc = append(pc, &ProductCriteria{
-			ID: product.ID,
+			ID:       product.ID,
 			Quantity: 1,
-			Amount: product.Amount,
+			Amount:   product.Amount,
 			Discount: 0,
-			IsGift: true,
+			IsGift:   true,
 		})
 	}
 

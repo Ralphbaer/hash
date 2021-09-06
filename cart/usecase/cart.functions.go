@@ -65,15 +65,15 @@ func (uc *CartUseCase) applyDiscount(ctx context.Context, discount float32, prod
 	return int32(float32(productAmount) * (1 - discount))
 }
 
-func (uc *CartUseCase) mapProductsAmount(ctx context.Context, pc []*ProductCriteria) []*e.ProductAmount {
-	productsAmount := make([]*e.ProductAmount, len(pc))
+func (uc *CartUseCase) mapProductsAmount(ctx context.Context, pc []*ProductCriteria) []e.ProductAmount {
+	productsAmount := make([]e.ProductAmount, len(pc))
 	for k, v := range pc {
-		productsAmount[k] = &e.ProductAmount{
+		productsAmount[k] = e.ProductAmount{
 			ID:          v.ID,
 			Quantity:    v.Quantity,
 			UnitAmount:  v.Amount,
 			TotalAmount: (v.Quantity) * (v.Amount),
-			Discount:    v.Amount - uc.applyDiscount(ctx, v.Discount, v.Amount),
+			Discount:    (v.Amount - uc.applyDiscount(ctx, v.Discount, v.Amount)) * v.Quantity,
 			IsGift:      v.IsGift,
 		}
 	}
@@ -82,7 +82,7 @@ func (uc *CartUseCase) mapProductsAmount(ctx context.Context, pc []*ProductCrite
 }
 
 func (uc *CartUseCase) isBlackFriday(ctx context.Context, date time.Time) bool {
-	return date.Day() == blackFridayDate.Day() 
+	return date.Day() == blackFridayDate.Day()
 }
 
 func (uc *CartUseCase) containsAGiftProduct(ctx context.Context, products []*e.Product) bool {

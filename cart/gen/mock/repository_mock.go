@@ -35,6 +35,21 @@ func (m *MockProductRepository) EXPECT() *MockProductRepositoryMockRecorder {
 	return m.recorder
 }
 
+// FindRandom mocks base method
+func (m *MockProductRepository) FindRandom(arg0 context.Context) (*entity.Product, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindRandom", arg0)
+	ret0, _ := ret[0].(*entity.Product)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindRandom indicates an expected call of FindRandom
+func (mr *MockProductRepositoryMockRecorder) FindRandom(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindRandom", reflect.TypeOf((*MockProductRepository)(nil).FindRandom), arg0)
+}
+
 // List mocks base method
 func (m *MockProductRepository) List(arg0 context.Context, arg1 *repository.ProductFilter) ([]*entity.Product, error) {
 	m.ctrl.T.Helper()
