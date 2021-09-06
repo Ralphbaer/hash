@@ -2,60 +2,60 @@
 <testsuites>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/app">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/entity">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/gateway">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/gen">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/gen/mock">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/handler">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/repository">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="2" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/cart/usecase">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 		<testcase classname="github.com/Ralphbaer/hash/cart/usecase" name="TestCartUseCase_CreateCart" time="0.000000"></testcase>
 		<testcase classname="github.com/Ralphbaer/hash/cart/usecase" name="TestCartUseCase_CreateCart_ErrCantBuyAGift" time="0.000000"></testcase>
 	</testsuite>
 	<testsuite tests="1" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/common">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 		<testcase classname="github.com/Ralphbaer/hash/common" name="TestGetenvBool" time="0.000000"></testcase>
 	</testsuite>
 	<testsuite tests="4" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/common/hmock">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 		<testcase classname="github.com/Ralphbaer/hash/common/hmock" name="TestFieldValue_Matches/eq1" time="0.000000"></testcase>
 		<testcase classname="github.com/Ralphbaer/hash/common/hmock" name="TestFieldValue_Matches/eq1#01" time="0.000000"></testcase>
@@ -64,12 +64,12 @@
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/common/hpointers">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/common/net/http">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 </testsuites>

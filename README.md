@@ -23,6 +23,8 @@ Inside /cart, you can run:
 make image           # Builds the container image
 make container      # Start the service on port 3000
 
+make discount-image  # Builds the container image
+make discount-container # Start the discount service on port 50051
 make run           # Start service on port 3000 too (no docker usage[fast-way])
 ```
 

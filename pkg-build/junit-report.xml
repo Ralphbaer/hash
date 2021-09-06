@@ -2,7 +2,7 @@
 <testsuites>
 	<testsuite tests="0" failures="0" time="0.000000" name="github.com/Ralphbaer/hash/pkg-build">
 		<properties>
-			<property name="go.version" value="go1.17 darwin/amd64"></property>
+			<property name="go.version" value="go1.14.5 darwin/amd64"></property>
 		</properties>
 	</testsuite>
 </testsuites>
