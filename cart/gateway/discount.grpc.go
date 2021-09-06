@@ -27,7 +27,7 @@ func NewDiscountClient(conn *grpc.ClientConn) *DepositClient {
 	}
 }
 
-// GetDiscount creates a new Notification and return it's ID
+// GetDiscount get a discount percentage given a productID
 func (g *DiscountGateway) GetDiscount(ctx context.Context, productID int32) (float32, error) {
 	client := pb.NewDiscountClient(g.conn)
 
