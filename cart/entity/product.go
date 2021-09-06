@@ -7,9 +7,9 @@ type ProductAmount struct {
 	// ID is a unique field
 	ID          int32 `json:"id"`
 	Quantity    int32 `json:"quantity"`
-	UnitAmount  int32 `json:"unit_amount"`
-	TotalAmount int32 `json:"total_amount"`
-	Discount    int32 `json:"discount"`
+	UnitAmount  int64 `json:"unit_amount"`
+	TotalAmount int64 `json:"total_amount"`
+	Discount    int64 `json:"discount"`
 	IsGift      bool  `json:"is_gift"`
 }
 
@@ -20,6 +20,6 @@ type Product struct {
 	ID          int32  `json:"id"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
-	Amount      int32  `json:"amount"`
+	Amount      int64  `json:"amount"`
 	IsGift      bool   `json:"is_gift"`
 }

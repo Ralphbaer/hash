@@ -13,7 +13,7 @@ var blackFridayDate time.Time = time.Date(2021, 11, 26, 00, 00, 00, 0, time.UTC)
 type ProductCriteria struct {
 	ID       int32
 	Quantity int32
-	Amount   int32
+	Amount   int64
 	Discount float32
 	IsGift   bool
 }
@@ -41,17 +41,17 @@ func (uc *CartUseCase) mapProductCriteria(ctx context.Context, p []*e.Product, p
 	return pc, nil
 }
 
-func (uc *CartUseCase) calculateTotalAmount(ctx context.Context, pc []*ProductCriteria) int32 {
-	result := int32(0)
+func (uc *CartUseCase) calculateTotalAmount(ctx context.Context, pc []*ProductCriteria) int64 {
+	result := int64(0)
 	for _, v := range pc {
-		result += (v.Amount * v.Quantity)
+		result += (v.Amount * int64(v.Quantity))
 	}
 
 	return result
 }
 
-func (uc *CartUseCase) calculateTotalAmountWithDiscount(ctx context.Context, pc []*ProductCriteria) (int32, error) {
-	result := int32(0)
+func (uc *CartUseCase) calculateTotalAmountWithDiscount(ctx context.Context, pc []*ProductCriteria) (int64, error) {
+	result := int64(0)
 	for _, v := range pc {
 		for i := 0; i < int(v.Quantity); i++ {
 			result += uc.applyDiscount(ctx, v.Discount, v.Amount)
@@ -61,8 +61,8 @@ func (uc *CartUseCase) calculateTotalAmountWithDiscount(ctx context.Context, pc 
 	return result, nil
 }
 
-func (uc *CartUseCase) applyDiscount(ctx context.Context, discount float32, productAmount int32) int32 {
-	return int32(float32(productAmount) * (1 - discount))
+func (uc *CartUseCase) applyDiscount(ctx context.Context, discount float32, productAmount int64) int64 {
+	return int64(float32(productAmount) * (1 - discount))
 }
 
 func (uc *CartUseCase) mapProductsAmount(ctx context.Context, pc []*ProductCriteria) []e.ProductAmount {
@@ -72,8 +72,8 @@ func (uc *CartUseCase) mapProductsAmount(ctx context.Context, pc []*ProductCrite
 			ID:          v.ID,
 			Quantity:    v.Quantity,
 			UnitAmount:  v.Amount,
-			TotalAmount: (v.Quantity) * (v.Amount),
-			Discount:    (v.Amount - uc.applyDiscount(ctx, v.Discount, v.Amount)) * v.Quantity,
+			TotalAmount: (int64(v.Quantity)) * (v.Amount),
+			Discount:    (v.Amount - uc.applyDiscount(ctx, v.Discount, v.Amount)) * int64(v.Quantity),
 			IsGift:      v.IsGift,
 		}
 	}
