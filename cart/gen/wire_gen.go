@@ -9,6 +9,7 @@ import (
 	"github.com/Ralphbaer/hash/cart/app"
 	"github.com/Ralphbaer/hash/cart/gateway"
 	"github.com/Ralphbaer/hash/cart/handler"
+	"github.com/Ralphbaer/hash/cart/repository"
 	"github.com/Ralphbaer/hash/cart/usecase"
 	"github.com/Ralphbaer/hash/common"
 	"github.com/google/wire"
@@ -21,13 +22,15 @@ import (
 
 func InitializeApp() *app.App {
 	config := app.NewConfig()
+	productJSONRepository := repository.NewProductJSONRepository()
 	clientConn := setupDiscountGatewayClient(config)
 	depositClient := gateway.NewDiscountClient(clientConn)
 	discountGateway := &gateway.DiscountGateway{
 		DepositClient: depositClient,
 	}
 	cartUseCase := &usecase.CartUseCase{
-		Gateway: discountGateway,
+		Repository: productJSONRepository,
+		Gateway:    discountGateway,
 	}
 	cartHandler := &handler.CartHandler{
 		UseCase: cartUseCase,
@@ -51,4 +54,4 @@ func setupDiscountGatewayClient(cfg *app.Config) *grpc.ClientConn {
 	return conn
 }
 
-var applicationSet = wire.NewSet(common.InitLocalEnvConfig, app.NewConfig, app.NewRouter, app.NewServer, setupDiscountGatewayClient, gateway.NewDiscountClient, wire.Struct(new(gateway.DiscountGateway), "*"), wire.Struct(new(usecase.CartUseCase), "*"), wire.Struct(new(handler.CartHandler), "*"), wire.Bind(new(gateway.DiscountServiceGateway), new(*gateway.DiscountGateway)), wire.Bind(new(http.Handler), new(*mux.Router)))
+var applicationSet = wire.NewSet(common.InitLocalEnvConfig, app.NewConfig, app.NewRouter, app.NewServer, repository.NewProductJSONRepository, setupDiscountGatewayClient, gateway.NewDiscountClient, wire.Struct(new(gateway.DiscountGateway), "*"), wire.Struct(new(usecase.CartUseCase), "*"), wire.Struct(new(handler.CartHandler), "*"), wire.Bind(new(repository.ProductRepository), new(*repository.ProductJSONRepository)), wire.Bind(new(gateway.DiscountServiceGateway), new(*gateway.DiscountGateway)), wire.Bind(new(http.Handler), new(*mux.Router)))

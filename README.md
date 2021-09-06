@@ -14,7 +14,7 @@ This repo contains the source code of the Cart service.
 | Name | Version | Notes | Mandatory
 |------|---------|---------|---------|
 | [golang](https://golang.org/dl/) | >= go1.15.14 | Main programming language | true
-| [docker](https://www.docker.com/) | n/a | Used to start local environment providers (MongoDB) | true
+| [docker](https://www.docker.com/) | n/a | Used to handle core mock images and start local service | true
 | [aws-cli](https://aws.amazon.com/pt/cli/) | v2 | Used to create all AWS Enviroment (Just in case you want to know) | false
 | [sh/bash] | depending on OS. Anyway, you should be able do execute any .sh file | Used to lint checks, test processes and some console interface customizations | true
 | [make](https://www.gnu.org/software/make/) | depending on OS. Anyway, you should be able do execute make commands to run the project, tests and localenvironment | n/a | true

@@ -58,6 +58,6 @@ func (handler *CartHandler) Create(p interface{}) http.Handler {
 		// w.Header().Set("Location", fmt.Sprintf("%s/cart/carts/%s", r.Host, cart.ID))
 		w.Header().Set("Content-Type", "application/json")
 
-		commonHTTP.Created(w, cart)
+		commonHTTP.OK(w, cart)
 	})
 }

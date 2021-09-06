@@ -76,30 +76,6 @@ lint() {
   fi
 }
 
-checkEnvs() {
-  title1 "STARTING SECRETS CHECK"
-  err="0"
-  for DIR in "$CURR_DIR"/*; do
-    FILE="$DIR"/.env
-    if [ -f "$FILE" ]; then
-      data=`cat $FILE`
-      if [[ $data =~ SECRET=[0-9A-Za-z]{1,} ]]; then
-        lineError "Secret exposed in file file:////$FILE"
-        err="1"
-      fi
-      if [[ $data =~ MONGO_CONNECTION_STRING= && ! $data =~ localhost ]]; then
-        lineError "Data base connection string exposed in file file://$FILE"
-        err="1"
-      fi
-    fi
-  done
-  if [ $err -eq 1 ];then
-    exit 1
-  else
-    lineOk "All env file passed"
-  fi
-}
-
 echo -e "\n\n"
 title1 "STARTING PRE-COMMIT SCRIPT"
 
@@ -107,8 +83,6 @@ checkHooks
 
 if [ "$1" == "lint" ]; then
   lint
-elif [ "$1" == "checkEnvs" ]; then
-  checkEnvs
 else
   echo "Executing with parameter $1"
   makeCmd "$1"

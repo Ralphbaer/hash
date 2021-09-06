@@ -14,28 +14,28 @@ import (
 type DiscountGateway struct {
 	*DepositClient
 }
- 
+
 // DepositClient represents the client to invoke discount service
 type DepositClient struct {
-	conn    *grpc.ClientConn
+	conn *grpc.ClientConn
 }
 
 // NewDiscountClient creates an instance of DepositClient
 func NewDiscountClient(conn *grpc.ClientConn) *DepositClient {
 	return &DepositClient{
-		conn:    conn,
+		conn: conn,
 	}
 }
- 
+
 // GetDiscount creates a new Notification and return it's ID
 func (g *DiscountGateway) GetDiscount(ctx context.Context, productID int32) (float32, error) {
 	client := pb.NewDiscountClient(g.conn)
- 
+
 	request := &pb.GetDiscountRequest{ProductID: productID}
 
 	ctx, cancel := context.WithDeadline(ctx, time.Now().Add(time.Second))
 	defer cancel()
- 
+
 	response, err := client.GetDiscount(ctx, request)
 	if err != nil {
 		if er, ok := status.FromError(err); ok {
@@ -43,6 +43,6 @@ func (g *DiscountGateway) GetDiscount(ctx context.Context, productID int32) (flo
 		}
 		return 0, fmt.Errorf("server: %s", err.Error())
 	}
- 
+
 	return response.GetPercentage(), nil
 }

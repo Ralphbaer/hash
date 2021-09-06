@@ -4,8 +4,8 @@ package entity
 // including its amount and if its a gift or not.
 // swagger:model Cart
 type Cart struct {
-	TotalAmount             string `json:"total_amount"`
-	TotalAmountWithDiscount string `json:"total_amount_with_discount"`
-	TotalDiscount           string `json:"total_discount"`
-	Products                []*Product    `json:"amount"`
+	TotalAmount             int32            `json:"total_amount"`
+	TotalAmountWithDiscount int32            `json:"total_amount_with_discount"`
+	TotalDiscount           int32            `json:"total_discount"`
+	Products                []*ProductAmount `json:"products"`
 }

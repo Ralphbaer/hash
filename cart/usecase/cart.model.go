@@ -4,13 +4,12 @@ package usecase
 // We can understand it as a Command. It is used in CREATE operations.
 // swagger:model CreateCartInput
 type CreateCartInput struct {
-	Products []*Product `json:"products"`
+	Products []*ProductRequest `json:"products"`
 }
 
-// Product represents a collection of products data,
-// including its amount and if its a gift or not.
-// swagger:model Product
-type Product struct {
-	ID       int `json:"id"`
-	Quantity int32  `json:"quantity"`
+// ProductRequest represents the incoming product request data,
+// swagger:model ProductRequest
+type ProductRequest struct {
+	ID       int32 `json:"id"`
+	Quantity int32 `json:"quantity"`
 }

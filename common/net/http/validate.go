@@ -7,7 +7,6 @@ import (
 	"github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"
 	en2 "github.com/go-playground/validator/translations/en"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"gopkg.in/go-playground/validator.v9"
 )
@@ -63,22 +62,6 @@ func newValidator() (*validator.Validate, ut.Translator) {
 			return ""
 		}
 		return name
-	})
-
-	_ = v.RegisterValidation("objectId", func(fl validator.FieldLevel) bool {
-		if fl.Field().String() == "" {
-			return true
-		}
-		_, err := primitive.ObjectIDFromHex(fl.Field().String())
-		return err == nil
-	})
-
-	_ = v.RegisterTranslation("objectId", trans, func(ut ut.Translator) error {
-		return ut.Add("objectId", "{0} must have a valid primitive objectId value", true)
-	}, func(ut ut.Translator, fe validator.FieldError) string {
-		t, _ := ut.T("objectId", fe.Field())
-
-		return t
 	})
 
 	return v, trans
