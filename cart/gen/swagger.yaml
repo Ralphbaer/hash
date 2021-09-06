@@ -1,0 +1,186 @@
+basePath: /cart
+consumes:
+- application/json
+definitions:
+  Cart:
+    description: including its amount and if its a gift or not.
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/ProductAmount'
+        type: array
+        x-go-name: Products
+      total_amount:
+        format: int32
+        type: integer
+        x-go-name: TotalAmount
+      total_amount_with_discount:
+        format: int32
+        type: integer
+        x-go-name: TotalAmountWithDiscount
+      total_discount:
+        format: int32
+        type: integer
+        x-go-name: TotalDiscount
+    title: Cart represents a collection of Cart data,
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/cart/entity
+  CreateCartInput:
+    description: We can understand it as a Command. It is used in CREATE operations.
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/ProductRequest'
+        type: array
+        x-go-name: Products
+    title: CreateCartInput is the set of information that will be used to enter data through our handlers.
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/cart/usecase
+  FieldValidations:
+    additionalProperties:
+      type: string
+    title: FieldValidations represents a field error response.
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/common/net/http
+  Product:
+    description: including its amount and if its a gift or not.
+    properties:
+      amount:
+        format: int32
+        type: integer
+        x-go-name: Amount
+      description:
+        type: string
+        x-go-name: Description
+      id:
+        format: int32
+        type: integer
+        x-go-name: ID
+      is_gift:
+        type: boolean
+        x-go-name: IsGift
+      title:
+        type: string
+        x-go-name: Title
+    title: Product represents a collection of products data,
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/cart/entity
+  ProductAmount:
+    description: including its amount and if its a gift or not.
+    properties:
+      discount:
+        format: int32
+        type: integer
+        x-go-name: Discount
+      id:
+        description: ID is a unique field
+        format: int32
+        type: integer
+        x-go-name: ID
+      is_gift:
+        type: boolean
+        x-go-name: IsGift
+      quantity:
+        format: int32
+        type: integer
+        x-go-name: Quantity
+      total_amount:
+        format: int32
+        type: integer
+        x-go-name: TotalAmount
+      unit_amount:
+        format: int32
+        type: integer
+        x-go-name: UnitAmount
+    title: ProductAmount represents a collection of products data,
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/cart/entity
+  ProductRequest:
+    properties:
+      id:
+        format: int32
+        type: integer
+        x-go-name: ID
+      quantity:
+        format: int32
+        type: integer
+        x-go-name: Quantity
+    title: ProductRequest represents the incoming product request data,
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/cart/usecase
+  ResponseError:
+    description: ResponseError represents a HTTP response error payload
+    properties:
+      code:
+        format: int64
+        type: integer
+        x-go-name: Code
+      message:
+        type: string
+        x-go-name: Message
+      origin:
+        type: string
+        x-go-name: Origin
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/common/net/http
+  ValidationError:
+    description: ValidationError represents an error occurred when a request to an action is invalid
+    properties:
+      code:
+        format: int64
+        type: integer
+        x-go-name: Code
+      fields:
+        $ref: '#/definitions/FieldValidations'
+      message:
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: github.com/Ralphbaer/hash/common/net/http
+info:
+  description: This guide describes all Hash Cart API and usecase.
+  title: Cart API.
+  version: 0.0.1
+paths:
+  /carts:
+    post:
+      operationId: Create
+      parameters:
+      - description: The payload
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/CreateCartInput'
+        type: string
+      responses:
+        "201":
+          description: Success Operation
+          schema:
+            $ref: '#/definitions/Cart'
+        "400":
+          description: Invalid Input - Input has invalid/missing values
+          examples:
+            application/json:
+              code: 400
+              message: message
+          schema:
+            $ref: '#/definitions/ValidationError'
+      security:
+      - Definitions: []
+      summary: Creates a Cart and applies a discount to each product (if a discount is available).
+      tags:
+      - carts
+produces:
+- application/json
+schemes:
+- http
+- https
+swagger: "2.0"
+x-meta-array:
+- value1
+- value2
+x-meta-array-obj:
+- name: obj
+  value: field
+x-meta-value: value

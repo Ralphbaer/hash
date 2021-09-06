@@ -2,9 +2,12 @@ package usecase
 
 import (
 	"context"
+	"time"
 
 	e "github.com/Ralphbaer/hash/cart/entity"
 )
+
+var blackFridayDate time.Time = time.Date(2021, 11, 26, 00, 00, 00, 0, time.UTC)
 
 // ProductCriteria represents the aggregate information about Product criteria
 type ProductCriteria struct {
@@ -76,4 +79,18 @@ func (uc *CartUseCase) mapProductsAmount(ctx context.Context, pc []*ProductCrite
 	}
 
 	return productsAmount
+}
+
+func (uc *CartUseCase) isBlackFriday(ctx context.Context, date time.Time) bool {
+	return date.Day() == blackFridayDate.Day() 
+}
+
+func (uc *CartUseCase) containsAGiftProduct(ctx context.Context, products []*e.Product) bool {
+	for _, v := range products {
+		if v.IsGift {
+			return true
+		}
+	}
+
+	return false
 }

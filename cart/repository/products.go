@@ -11,4 +11,5 @@ import (
 // ProductRepository manages product repository operations
 type ProductRepository interface {
 	List(ctx context.Context, f *ProductFilter) ([]*e.Product, error)
+	FindRandom(ctx context.Context) (*e.Product, error)
 }

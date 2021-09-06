@@ -22,7 +22,7 @@ func NewProductJSONRepository() *ProductJSONRepository {
 	}
 }
 
-// List returns all products
+// List returns a list of products given the ProductFilter type parameter
 func (c *ProductJSONRepository) List(ctx context.Context, f *ProductFilter) ([]*e.Product, error) {
 	pwd, _ := os.Getwd()
 	data, err := ioutil.ReadFile(fmt.Sprintf("%s/repository/%s", pwd, c.FilePath))
@@ -37,4 +37,20 @@ func (c *ProductJSONRepository) List(ctx context.Context, f *ProductFilter) ([]*
 	}
 
 	return withIDs(obj, f.IDs), nil
+}
+
+func (c *ProductJSONRepository) FindRandom(ctx context.Context) (*e.Product, error) {
+	pwd, _ := os.Getwd()
+	data, err := ioutil.ReadFile(fmt.Sprintf("%s/repository/%s", pwd, c.FilePath))
+	if err != nil {
+		return nil, err
+	}
+
+	var obj []*ProductJSONModel
+	err = json.Unmarshal(data, &obj)
+	if err != nil {
+		return nil, err
+	}
+
+	return withRandom(obj), nil
 }
