@@ -23,7 +23,7 @@ docker compose build
 ```
 ### Start Local
 ```bash
-docker-compose up
+docker compose up
 ```
 
 # Testing
