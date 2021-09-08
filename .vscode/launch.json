@@ -11,7 +11,7 @@
             "mode": "auto",
             "program": "/Users/cleversonsoares/Workspace/hash/cart/main.go",
             "env": {
-                "SERVER_ADDRESS": ":3000"
+                "SERVER_ADDRESS": ":9091"
             },
             "args": []
         },

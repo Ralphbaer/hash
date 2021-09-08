@@ -21,7 +21,7 @@ import (
 )
 
 func setupDiscountGatewayClient(cfg *app.Config) *grpc.ClientConn {
-	conn, err := grpc.Dial(":50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("hash-discount-service:50050", grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}

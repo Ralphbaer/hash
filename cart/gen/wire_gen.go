@@ -46,7 +46,7 @@ func InitializeApp() *app.App {
 // inject.go:
 
 func setupDiscountGatewayClient(cfg *app.Config) *grpc.ClientConn {
-	conn, err := grpc.Dial(":50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("hash-discount-service:50051", grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}

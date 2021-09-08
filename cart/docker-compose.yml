@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  hash-discount-service:
+    container_name: hash-discount-service
+    image: hashorg/hash-mock-discount-service
+    ports:
+      - 50051:50051
+    tty:
+      true
+  hash-cart-service:
+    container_name: hash-cart-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file:
+     - .env
+    ports:
+      - 9091:9091
+    tty:
+      true

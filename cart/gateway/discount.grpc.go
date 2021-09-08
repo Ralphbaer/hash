@@ -38,6 +38,7 @@ func (g *DiscountGateway) GetDiscount(ctx context.Context, productID int32) (flo
 
 	response, err := client.GetDiscount(ctx, request)
 	if err != nil {
+		fmt.Println(err)
 		if er, ok := status.FromError(err); ok {
 			return 0, fmt.Errorf("grpc: %s, %s", er.Code(), er.Message())
 		}

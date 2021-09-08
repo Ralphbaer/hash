@@ -16,16 +16,14 @@ This repo contains the source code of the Cart service.
 | [make](https://www.gnu.org/software/make/) | depending on OS. Anyway, you should be able do execute make commands to run the project, tests and localenvironment | n/a | true
 
 # Usage
-
-### Start Local
-Inside /cart, you can run:
+Inside /cart, follow the steps:
+### Build Images
 ```bash
-make image           # Builds the container image
-make container      # Start the service on port 3000
-
-make discount-image  # Builds the container image
-make discount-container # Start the discount service on port 50051
-make run           # Start service on port 3000 too (no docker usage[fast-way])
+docker compose build
+```
+### Start Local
+```bash
+docker-compose up
 ```
 
 # Testing
@@ -35,4 +33,4 @@ make test                 # Run all unit tests
 ```
 ## Documentation
 
-To access the docs locally, just change the host in the url to localhost:3000. Something like: http://localhost:3000/cart/docs
+To access the docs locally, just change the host in the url to 127.0.0.1:9091. Something like: http://127.0.0.1:9091/cart/docs

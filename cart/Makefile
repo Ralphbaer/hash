@@ -43,14 +43,14 @@ image: build_linux
 	docker build -t hash/$(service-name):v1 .
 
 container:
-	docker run --env SERVER_ADDRESS=:3000 -it -p 127.0.0.1:3000:3000 hash/$(service-name):v1 bash
+	docker run --env SERVER_ADDRESS=:9091 -it -p 127.0.0.1:9091:9091 hash/$(service-name):v1 bash
 
 discount-image:
 	docker pull hashorg/hash-mock-discount-service
-	
+
 discount-container:
 	docker run -p 50051:50051 hashorg/hash-mock-discount-service
-
+	
 deploy-image:
 	aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 742261599957.dkr.ecr.us-east-2.amazonaws.com/hash/$(service-name) | bash	
 	docker tag hash/$(service-name):v1 742261599957.dkr.ecr.us-east-2.amazonaws.com/hash/$(service-name)

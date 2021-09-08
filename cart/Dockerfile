@@ -11,6 +11,6 @@ RUN rm ./gen/Dockerfile
 
 RUN groupadd -r appusers && useradd --no-log-init -r -g appusers appuser
 
-EXPOSE 3000
+EXPOSE 9091
 
-ENTRYPOINT ["./cart-service"]
+ENTRYPOINT ["./cart-service", "0.0.0.0"]
